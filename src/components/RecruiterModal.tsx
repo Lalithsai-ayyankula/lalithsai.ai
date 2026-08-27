@@ -48,7 +48,6 @@ export const RecruiterModal: React.FC<Props> = ({ isOpen, onClose, onOpenFullRes
                   size="xl"
                   glow={true}
                   showStatusDot={true}
-                  showUploadTrigger={false}
                 />
               </div>
 

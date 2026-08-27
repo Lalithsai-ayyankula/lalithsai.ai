@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { HeroIntelligenceField } from '../three/HeroIntelligenceField';
 import { candidateProfile } from '../data/resumeData';
 import { ProfileAvatar } from '../components/ProfileAvatar';
+import { BorderGlow } from '../components/BorderGlow';
 import {
   FileText,
   Github,
@@ -26,7 +27,6 @@ interface Props {
 const cinematicEase = [0.16, 1, 0.3, 1] as const;
 
 export const HeroSection: React.FC<Props> = ({ onOpenResume, onOpenRecruiter }) => {
-
   return (
     <section
       id="hero"
@@ -90,88 +90,126 @@ export const HeroSection: React.FC<Props> = ({ onOpenResume, onOpenRecruiter }) 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-20 my-auto py-6 sm:py-10">
         <div className="max-w-4xl space-y-6 sm:space-y-7 text-left">
           
-          {/* Sequence Phase 2: Professional Role & Research Tag Reveal */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15, ease: cinematicEase }}
-            className="flex flex-wrap items-center gap-2.5 sm:gap-3"
-          >
+          {/* Sequence Phase 2: Professional Role & Research Tag Reveal (Staggered Badges) */}
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
             {/* Professional Role Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/40 text-xs font-mono text-cyan-300 shadow-md backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, y: 14, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.45, delay: 0.12, ease: cinematicEase }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/40 text-xs font-mono text-cyan-300 shadow-md backdrop-blur-md"
+            >
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
               <span className="font-bold tracking-wider">AI / ML ENGINEER</span>
-            </div>
+            </motion.div>
 
             {/* Research Institution Tag */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/85 border border-slate-800 text-xs font-mono text-slate-300 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, y: 14, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.45, delay: 0.18, ease: cinematicEase }}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/85 border border-slate-800 text-xs font-mono text-slate-300 backdrop-blur-md"
+            >
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
               <span>IIIT Hyderabad (LTRC)</span>
-            </div>
+            </motion.div>
 
             {/* Relocation / Work Mode */}
-            <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-[11px] font-mono text-emerald-300 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, y: 14, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.45, delay: 0.24, ease: cinematicEase }}
+              className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-[11px] font-mono text-emerald-300 backdrop-blur-md"
+            >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               <span>Full-Time WFO Hyderabad Ready</span>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
-          {/* Sequence Phase 3: Personal Photo & Editorial Name Anchor with Fluid Clamp Typography */}
+          {/* Sequence Phase 3: Personal Photo & Editorial Name Anchor with Staggered Typography */}
           <div className="space-y-4">
             <div className="flex flex-col md:flex-row items-start md:items-center gap-6 sm:gap-8 lg:gap-10">
-              {/* Profile Photo: High-Impact Portrait Module */}
+              {/* Profile Photo: High-Impact Portrait Module with Cinematic Entrance */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.88, x: -20 }}
-                animate={{ opacity: 1, scale: 1, x: 0 }}
-                transition={{ duration: 0.75, delay: 0.26, ease: cinematicEase }}
+                initial={{ opacity: 0, scale: 0.88, x: -24, filter: 'blur(6px)' }}
+                animate={{ opacity: 1, scale: 1, x: 0, filter: 'blur(0px)' }}
+                transition={{ duration: 0.8, delay: 0.28, ease: cinematicEase }}
                 className="relative group shrink-0"
               >
-                {/* Outer Ambient Cyan & Indigo Rim Glow */}
-                <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-cyan-400/30 via-indigo-500/20 to-sky-400/30 blur-xl group-hover:blur-2xl group-hover:from-cyan-400/50 transition-all duration-300 pointer-events-none" />
+                {/* Outer Ambient Cyan & Indigo Rim Glow with Staggered Entrance */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 0.85, scale: 1 }}
+                  transition={{ duration: 1.0, delay: 0.35, ease: cinematicEase }}
+                  className="absolute -inset-3 rounded-[28px] bg-gradient-to-br from-cyan-400/35 via-indigo-500/25 to-sky-400/30 blur-2xl group-hover:blur-3xl group-hover:from-cyan-400/55 transition-all duration-500 pointer-events-none group-hover:opacity-100"
+                />
 
-                {/* Technical HUD Portrait Frame */}
-                <div className="relative p-1.5 rounded-3xl bg-slate-950/90 border border-cyan-400/50 group-hover:border-cyan-300 shadow-[0_0_40px_rgba(6,182,212,0.3)] group-hover:shadow-[0_0_55px_rgba(6,182,212,0.45)] transition-all duration-300">
-                  {/* Subtle Technical Corner Brackets */}
-                  <div className="absolute top-1 left-1 w-3 h-3 border-t-2 border-l-2 border-cyan-400 rounded-tl-sm pointer-events-none" />
-                  <div className="absolute top-1 right-1 w-3 h-3 border-t-2 border-r-2 border-cyan-400 rounded-tr-sm pointer-events-none" />
-                  <div className="absolute bottom-1 left-1 w-3 h-3 border-b-2 border-l-2 border-cyan-400 rounded-bl-sm pointer-events-none" />
-                  <div className="absolute bottom-1 right-1 w-3 h-3 border-b-2 border-r-2 border-cyan-400 rounded-br-sm pointer-events-none" />
+                {/* Monochromatic High-End BorderGlow Portrait Frame */}
+                <BorderGlow
+                  borderRadius={26}
+                  glowColor="215 15% 75%"
+                  backgroundColor="#020617"
+                  colors={['#475569', '#94a3b8', '#cbd5e1']}
+                  glowIntensity={0.65}
+                  fillOpacity={0.15}
+                  edgeSensitivity={24}
+                  glowRadius={30}
+                  className="relative p-2 rounded-[26px] border border-slate-700/70 shadow-[0_0_45px_rgba(2,6,23,0.8)] backdrop-blur-xl transition-all duration-300"
+                >
+                  {/* Subtle Technical Monochromatic Corner Brackets */}
+                  <div className="absolute top-1.5 left-1.5 w-3.5 h-3.5 border-t-2 border-l-2 border-slate-400/80 rounded-tl-sm pointer-events-none z-10" />
+                  <div className="absolute top-1.5 right-1.5 w-3.5 h-3.5 border-t-2 border-r-2 border-slate-400/80 rounded-tr-sm pointer-events-none z-10" />
+                  <div className="absolute bottom-1.5 left-1.5 w-3.5 h-3.5 border-b-2 border-l-2 border-slate-400/80 rounded-bl-sm pointer-events-none z-10" />
+                  <div className="absolute bottom-1.5 right-1.5 w-3.5 h-3.5 border-b-2 border-r-2 border-slate-400/80 rounded-br-sm pointer-events-none z-10" />
 
+                  {/* Profile Avatar Component */}
                   <ProfileAvatar
                     size="hero"
                     glow={false}
                     showStatusDot={true}
                     showUploadTrigger={false}
-                    className="rounded-2xl ring-2 ring-slate-950 overflow-hidden cursor-default"
+                    className="rounded-2xl ring-2 ring-slate-950 overflow-hidden"
                   />
-                </div>
+                </BorderGlow>
               </motion.div>
 
-              {/* Clamp-Based Primary Title: AYYANKULA LALITH SAI KUMAR */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.94, y: 16, filter: 'blur(3px)' }}
-                animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
-                transition={{ duration: 0.75, delay: 0.3, ease: cinematicEase }}
-                className="space-y-2 flex-1"
-              >
-                <div className="flex items-center gap-3">
+              {/* Clamp-Based Primary Title & Surrounding Identity Hierarchy */}
+              <div className="space-y-2 flex-1">
+                {/* Eyebrow Label & Gradient Divider */}
+                <motion.div
+                  initial={{ opacity: 0, x: -15, filter: 'blur(3px)' }}
+                  animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                  transition={{ duration: 0.5, delay: 0.34, ease: cinematicEase }}
+                  className="flex items-center gap-3"
+                >
                   <span className="text-xs sm:text-sm font-mono font-bold tracking-[0.3em] text-cyan-400 uppercase">
                     RESEARCH PROFILE //
                   </span>
                   <div className="h-px flex-1 max-w-[140px] bg-gradient-to-r from-cyan-500/80 via-indigo-500/50 to-transparent" />
-                </div>
+                </motion.div>
 
-                <h1 className="text-[clamp(2.1rem,5.5vw,5.2rem)] font-black tracking-tight text-white font-display leading-[0.94] select-none">
+                {/* Candidate Name with Typography Stagger */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 18, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{ duration: 0.65, delay: 0.40, ease: cinematicEase }}
+                  className="text-[clamp(2.1rem,5.5vw,5.2rem)] font-black tracking-tight text-white font-display leading-[0.94] select-none"
+                >
                   <span className="text-cyan-400">AYYANKULA </span>
                   <br className="hidden sm:inline" />
                   <span>LALITH SAI </span>
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-cyan-400">
                     KUMAR
                   </span>
-                </h1>
+                </motion.h1>
 
                 {/* AI/ML Engineer & Speech Processing Narrative Subtitle */}
-                <div className="pt-1 space-y-1">
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: 0.48, ease: cinematicEase }}
+                  className="pt-1 space-y-1"
+                >
                   <p className="text-xs sm:text-sm md:text-base font-mono text-cyan-300 font-semibold tracking-wide flex flex-wrap items-center gap-x-2 gap-y-1">
                     <span className="text-white">AI/ML ENGINEER</span>
                     <span className="text-cyan-500">•</span>
@@ -180,60 +218,65 @@ export const HeroSection: React.FC<Props> = ({ onOpenResume, onOpenRecruiter }) 
                   <p className="text-xs sm:text-sm text-slate-400 font-mono">
                     LLMs • RAG • Agentic AI • NLP • Speech AI • Deep Learning
                   </p>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             </div>
           </div>
 
           {/* Sequence Phase 4: Resume-Grounded Professional Positioning & Technical Labels */}
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.44, ease: cinematicEase }}
-            className="space-y-4"
-          >
+          <div className="space-y-4">
             {/* Confident Brand Narrative Line */}
-            <div className="flex items-center gap-2 text-sm sm:text-base font-display font-semibold text-cyan-300">
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.55, ease: cinematicEase }}
+              className="flex items-center gap-2 text-sm sm:text-base font-display font-semibold text-cyan-300"
+            >
               <Sparkles className="w-4 h-4 text-cyan-400 shrink-0" />
               <span>Building End-to-End Multistage LLM & Speech AI Systems for Real-World Problems.</span>
-            </div>
+            </motion.div>
 
             {/* Accurate Professional Grounded Technical Summary */}
-            <p className="text-base sm:text-lg text-slate-300 font-sans max-w-2xl leading-relaxed">
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.62, ease: cinematicEase }}
+              className="text-base sm:text-lg text-slate-300 font-sans max-w-2xl leading-relaxed"
+            >
               AI/ML Engineer with hands-on experience in <strong className="text-cyan-300 font-semibold">LLMs, RAG, Agentic AI, NLP, Speech AI, and deep learning</strong>, 
               currently conducting speech-processing research at <strong className="text-white font-semibold">IIIT Hyderabad’s LTRC</strong>. 
               Experienced in building end-to-end AI systems, including multistage LLM/speech pipelines, retrieval systems, transformer-based speech classification, 
               and computer vision applications using <strong className="text-indigo-300 font-semibold">PyTorch, Hugging Face, FastAPI, and OpenCV</strong>.
-            </p>
+            </motion.p>
 
-            {/* Technical Specialization Micro-Labels (From Summary) */}
+            {/* Technical Specialization Micro-Labels (Staggered Pill Group) */}
             <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs text-slate-300">
-              <span className="px-2.5 py-1 rounded-md bg-slate-900/80 border border-slate-800 text-cyan-300">
-                LLMs & RAG
-              </span>
-              <span className="px-2.5 py-1 rounded-md bg-slate-900/80 border border-slate-800 text-indigo-300">
-                Agentic AI
-              </span>
-              <span className="px-2.5 py-1 rounded-md bg-slate-900/80 border border-slate-800 text-emerald-300">
-                Speech AI & NLP (LTRC)
-              </span>
-              <span className="px-2.5 py-1 rounded-md bg-slate-900/80 border border-slate-800 text-slate-200">
-                PyTorch & Hugging Face
-              </span>
-              <span className="px-2.5 py-1 rounded-md bg-slate-900/80 border border-slate-800 text-purple-300">
-                Computer Vision
-              </span>
-              <span className="px-2.5 py-1 rounded-md bg-slate-900/80 border border-slate-800 text-sky-300">
-                FastAPI APIs
-              </span>
+              {[
+                { text: 'LLMs & RAG', color: 'text-cyan-300', delay: 0.68 },
+                { text: 'Agentic AI', color: 'text-indigo-300', delay: 0.71 },
+                { text: 'Speech AI & NLP (LTRC)', color: 'text-emerald-300', delay: 0.74 },
+                { text: 'PyTorch & Hugging Face', color: 'text-slate-200', delay: 0.77 },
+                { text: 'Computer Vision', color: 'text-purple-300', delay: 0.80 },
+                { text: 'FastAPI APIs', color: 'text-sky-300', delay: 0.83 },
+              ].map((badge) => (
+                <motion.span
+                  key={badge.text}
+                  initial={{ opacity: 0, y: 10, scale: 0.92 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.4, delay: badge.delay, ease: cinematicEase }}
+                  className={`px-2.5 py-1 rounded-md bg-slate-900/80 border border-slate-800 ${badge.color}`}
+                >
+                  {badge.text}
+                </motion.span>
+              ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Sequence Phase 5: High-Contrast Interactive Actions Become Active */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.56, ease: cinematicEase }}
+            transition={{ duration: 0.5, delay: 0.86, ease: cinematicEase }}
             className="flex flex-wrap items-center gap-3 pt-2"
           >
             {/* Primary Action: Explore Systems */}
@@ -269,9 +312,9 @@ export const HeroSection: React.FC<Props> = ({ onOpenResume, onOpenRecruiter }) 
 
           {/* Sequence Phase 6: Verified Contact & Social Strip */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.68 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.94, ease: cinematicEase }}
             className="pt-2 flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400 border-t border-slate-800/60"
           >
             <a

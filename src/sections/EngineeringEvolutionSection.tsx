@@ -1,5 +1,6 @@
 import React from 'react';
 import { experience } from '../data/resumeData';
+import { BorderGlow } from '../components/BorderGlow';
 import { Building2, Calendar, MapPin, CheckCircle2, Sparkles, Terminal } from 'lucide-react';
 
 export const EngineeringEvolutionSection: React.FC = () => {
@@ -26,80 +27,92 @@ export const EngineeringEvolutionSection: React.FC = () => {
         <div className="space-y-6">
           {experience.map((exp, idx) => {
             return (
-              <div
+              <BorderGlow
                 key={exp.id}
-                id={`exp-card-${exp.id}`}
-                className={`rounded-2xl p-6 sm:p-8 transition-all border ${
+                edgeSensitivity={30}
+                glowColor={exp.isCurrent ? "190 90 60" : "220 70 55"}
+                backgroundColor="#090d16"
+                borderRadius={18}
+                glowRadius={36}
+                glowIntensity={exp.isCurrent ? 1.0 : 0.8}
+                coneSpread={26}
+                colors={
                   exp.isCurrent
-                    ? 'bg-slate-900/90 border-cyan-500/40 shadow-xl shadow-cyan-500/10'
-                    : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
-                }`}
+                    ? ['#06b6d4', '#10b981', '#38bdf8']
+                    : ['#64748b', '#38bdf8', '#818cf8']
+                }
+                className="w-full"
               >
-                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <span
-                        className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded ${
-                          exp.isCurrent
-                            ? 'bg-cyan-500 text-slate-950 shadow-sm'
-                            : 'bg-slate-800 text-slate-300'
-                        }`}
-                      >
-                        {exp.type.toUpperCase()}
-                      </span>
-                      {exp.isCurrent && (
-                        <span className="flex items-center gap-1 text-[11px] font-mono text-emerald-400">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                          CURRENT ROLE
+                <div
+                  id={`exp-card-${exp.id}`}
+                  className="p-6 sm:p-8 backdrop-blur-xl"
+                >
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span
+                          className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded ${
+                            exp.isCurrent
+                              ? 'bg-cyan-500 text-slate-950 shadow-sm'
+                              : 'bg-slate-800 text-slate-300'
+                          }`}
+                        >
+                          {exp.type.toUpperCase()}
                         </span>
-                      )}
+                        {exp.isCurrent && (
+                          <span className="flex items-center gap-1 text-[11px] font-mono text-emerald-400">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            CURRENT ROLE
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-bold text-white font-display">
+                        {exp.role}
+                      </h3>
+                      <div className="text-sm font-semibold text-cyan-300/90 font-sans mt-0.5">
+                        {exp.organization}
+                      </div>
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white font-display">
-                      {exp.role}
-                    </h3>
-                    <div className="text-sm font-semibold text-cyan-300/90 font-sans mt-0.5">
-                      {exp.organization}
+
+                    {/* Period & Location */}
+                    <div className="text-left lg:text-right font-mono text-xs text-slate-400 space-y-1">
+                      <div className="flex items-center lg:justify-end gap-1.5 text-slate-300">
+                        <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+                        <span>{exp.period}</span>
+                      </div>
+                      <div className="flex items-center lg:justify-end gap-1.5 text-slate-400">
+                        <MapPin className="w-3.5 h-3.5" />
+                        <span>{exp.location}</span>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Period & Location */}
-                  <div className="text-left lg:text-right font-mono text-xs text-slate-400 space-y-1">
-                    <div className="flex items-center lg:justify-end gap-1.5 text-slate-300">
-                      <Calendar className="w-3.5 h-3.5 text-cyan-400" />
-                      <span>{exp.period}</span>
-                    </div>
-                    <div className="flex items-center lg:justify-end gap-1.5 text-slate-400">
-                      <MapPin className="w-3.5 h-3.5" />
-                      <span>{exp.location}</span>
-                    </div>
+                  {/* Key Contributions List */}
+                  <div className="py-4">
+                    <ul className="space-y-2">
+                      {exp.description.map((item, itemIdx) => (
+                        <li key={itemIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
+                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
 
-                {/* Key Contributions List */}
-                <div className="py-4">
-                  <ul className="space-y-2">
-                    {exp.description.map((item, itemIdx) => (
-                      <li key={itemIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 shrink-0" />
-                        <span>{item}</span>
-                      </li>
+                  {/* Associated Technologies */}
+                  <div className="pt-4 border-t border-slate-800/80 flex flex-wrap items-center gap-1.5">
+                    <span className="text-[11px] font-mono text-slate-500 mr-1">Skills & Tools:</span>
+                    {exp.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-2.5 py-0.5 rounded bg-slate-950 text-slate-300 text-xs font-mono border border-slate-800"
+                      >
+                        {skill}
+                      </span>
                     ))}
-                  </ul>
+                  </div>
                 </div>
-
-                {/* Associated Technologies */}
-                <div className="pt-4 border-t border-slate-800/80 flex flex-wrap items-center gap-1.5">
-                  <span className="text-[11px] font-mono text-slate-500 mr-1">Skills & Tools:</span>
-                  {exp.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-2.5 py-0.5 rounded bg-slate-950 text-slate-300 text-xs font-mono border border-slate-800"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              </BorderGlow>
             );
           })}
         </div>

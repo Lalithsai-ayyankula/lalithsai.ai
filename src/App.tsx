@@ -5,7 +5,6 @@
 
 import React, { useState } from 'react';
 import { ProfilePhotoProvider } from './context/ProfilePhotoContext';
-import { PhotoUploadModal } from './components/PhotoUploadModal';
 import { Navigation } from './components/Navigation';
 import { HeroSection } from './sections/HeroSection';
 import { IdentitySection } from './sections/IdentitySection';
@@ -68,9 +67,6 @@ export default function App() {
           isOpen={isResumeModalOpen}
           onClose={() => setIsResumeModalOpen(false)}
         />
-
-        {/* Profile Photo Customizer / Upload Modal */}
-        <PhotoUploadModal />
       </div>
     </ProfilePhotoProvider>
   );

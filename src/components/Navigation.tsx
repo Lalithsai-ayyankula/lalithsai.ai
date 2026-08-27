@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Sparkles, Terminal, FileText, Zap, Menu, X, Camera } from 'lucide-react';
 import { ProfileAvatar } from './ProfileAvatar';
 import { useProfilePhoto } from '../context/ProfilePhotoContext';
+import { GooeyNav } from './GooeyNav';
 
 interface Props {
   onOpenRecruiter: () => void;
@@ -23,11 +24,11 @@ export const Navigation: React.FC<Props> = ({ onOpenRecruiter, onOpenResume }) =
 
   const navItems = [
     { label: "Identity", href: "#identity" },
-    { label: "Signature Pipeline", href: "#signature" },
-    { label: "Systems & Demos", href: "#systems" },
-    { label: "Tech Universe", href: "#universe" },
+    { label: "Pipeline", href: "#signature" },
+    { label: "Systems", href: "#systems" },
+    { label: "Universe", href: "#universe" },
     { label: "Experience", href: "#evolution" },
-    { label: "Credentials", href: "#proof" },
+    { label: "Proof", href: "#proof" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -35,8 +36,8 @@ export const Navigation: React.FC<Props> = ({ onOpenRecruiter, onOpenResume }) =
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80 py-3 shadow-2xl shadow-black/50'
-          : 'bg-transparent py-5'
+          ? 'bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80 py-2.5 shadow-2xl shadow-black/50'
+          : 'bg-transparent py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -57,18 +58,19 @@ export const Navigation: React.FC<Props> = ({ onOpenRecruiter, onOpenResume }) =
           </div>
         </a>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1 lg:gap-2 px-3 py-1.5 rounded-full bg-slate-900/60 border border-slate-800/80 backdrop-blur-md">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="px-3 py-1 rounded-full text-xs font-mono text-slate-300 hover:text-cyan-300 hover:bg-slate-800/60 transition-all"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        {/* Desktop Gooey Navigation Links */}
+        <div className="hidden lg:flex items-center px-2 py-1 rounded-full bg-slate-900/70 border border-slate-800/80 backdrop-blur-md shadow-lg shadow-black/40">
+          <GooeyNav
+            items={navItems}
+            particleCount={14}
+            particleDistances={[75, 8]}
+            particleR={90}
+            initialActiveIndex={0}
+            animationTime={500}
+            timeVariance={250}
+            colors={[1, 2, 3, 1, 2, 4]}
+          />
+        </div>
 
         {/* Action Controls */}
         <div className="hidden sm:flex items-center gap-2.5">

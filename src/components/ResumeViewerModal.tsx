@@ -244,7 +244,6 @@ B.Tech in CSE (AI & ML) - CGPA: 7.50 | KIET (JNTUK)
                       size="lg"
                       glow={true}
                       showStatusDot={true}
-                      showUploadTrigger={false}
                     />
                   </div>
                 </div>
