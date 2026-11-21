@@ -307,7 +307,7 @@ export const experience: Experience[] = [
     role: "Research Intern — Speech Processing",
     organization: "Language Technologies Research Centre (LTRC), IIIT Hyderabad",
     location: "Hyderabad, India (On-site)",
-    period: "Jun 2026 – Present",
+    period: "June 2026 – Aug 2026",
     isCurrent: true,
     type: "Research",
     description: [
